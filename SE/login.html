@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Randy & Vals - Log In / Sign Up</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="login-body-minimal">
+    <div class="login-page-container">
+
+        <header class="minimal-header">
+            <div class="header-left">
+                <a href="#" class="back-arrow-button"><i class="fas fa-arrow-left"></i></a>
+                <span>LOG IN / SIGN UP</span>
+            </div>
+            <div class="header-right">
+                <a href="#" class="help-question-button"><i class="fas fa-question"></i></a>
+            </div>
+        </header>
+        
+        <div class="login-content-wrapper">
+            <form class="login-form-minimal">
+                <div class="form-group-minimal">
+                    <label for="email_phone_username">Email/Phone/Username</label>
+                    <input type="text" id="email_phone_username" placeholder="" required>
+                </div>
+                
+                <button type="submit" class="login-button-minimal">
+                    Log In
+                </button>
+                <div class="social-login-separator-minimal">
+                    <span class="line"></span>
+                    <span class="text">OR</span>
+                    <span class="line"></span>
+                </div>
+
+                <div class="social-login-buttons-minimal">
+                    <button type="button" class="social-button-minimal facebook-button-minimal">
+                        <i class="fab fa-facebook-f"></i> Continue with Facebook
+                    </button>
+                    <button type="button" class="social-button-minimal google-button-minimal">
+                        <i class="fab fa-google"></i> Continue with Google
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginButton = document.querySelector('.login-button-minimal');
+            if (loginButton) {
+                loginButton.addEventListener('click', function(event) {
+                    event.preventDefault(); 
+                    
+                    window.location.href = 'index.html'; 
+                });
+            }
+            
+            
+            const backArrow = document.querySelector('.back-arrow-button');
+            if (backArrow) {
+                backArrow.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    history.back(); 
+                });
+            }
+
+            const helpButton = document.querySelector('.help-question-button');
+            if (helpButton) {
+                helpButton.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    alert('Need help? Contact support!'); 
+                });
+            }
+        });
+    </script>
+</body>
+</html>

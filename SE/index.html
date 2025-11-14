@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Randy & Vals Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>RANDY & VALS</h1>
+                <p>ELECTRICAL & GENERAL<br>MERCHANDISE</p>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active"><a href="#"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                    <li><a href="#"><i class="fas fa-box"></i> Products</a></li>
+                    <li><a href="#"><i class="fas fa-shopping-cart"></i> My Cart</a></li>
+                    <li><a href="#"><i class="fas fa-credit-card"></i> Payout</a></li>
+                    <li><a href="#"><i class="fas fa-user"></i> Profile</a></li>
+                    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li><a href="#"><i class="fas fa-sign-out-alt"></i> Log Out</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-help">
+                <a href="#"><i class="fas fa-question-circle"></i> Help</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="navbar">
+                <div class="nav-icons">
+                    <button class="icon-button"><i class="fas fa-bell"></i></button>
+                    <button class="icon-button"><i class="fas fa-search"></i></button>
+                 
+                </div>
+            </header>
+
+            <section class="dashboard-body">
+                <div class="main-cards">
+                    <div class="card-large promo-card">
+                        <div class="promo-text">
+                            <h2>Connecting<br>you to<br>Convenience</h2>
+                            <button class="shop-now-button">Shop Now</button>
+                        </div>
+                        <div class="promo-image">
+                            <img src="phone.jpg" alt="Smartphone" style="max-width: 100%; height: auto;">
+                        </div>
+                    </div>
+
+                    <div class="card-small latest-order-card">
+                        <h3>Latest Order</h3>
+                        <ul>
+                            <li>
+                                <div class="item-details">
+                                    <img src="cordless_drill.jpg" alt="Cordless Drill" class="item-thumbnail">
+                                    <div class="item-info">
+                                        <h4>Cordless Drill</h4>
+                                        <p>Power Tools</p>
+                                    </div>
+                                </div>
+                                <span class="item-price">₱ 1280</span>
+                            </li>
+                            <li>
+                                <div class="item-details">
+                                    <img src="vest.jpg" alt="High Visibility Vest" class="item-thumbnail">
+                                    <div class="item-info">
+                                        <h4>High Visibility Vest</h4>
+                                        <p>Safety Gear</p>
+                                    </div>
+                                </div>
+                                <span class="item-price">₱ 300</span>
+                            </li>
+                            <li>
+                                <div class="item-details">
+                                    <img src="pipe_cutter.jpg" alt="Pipe Cutter" class="item-thumbnail">
+                                    <div class="item-info">
+                                        <h4>Pipe Cutter</h4>
+                                        <p>Plumbing</p>
+                                    </div>
+                                </div>
+                                <span class="item-price">₱ 625</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="right-content">
+                    <div class="tabs">
+                        <button class="tab-button active">Recommended</button>
+                        <button class="tab-button">For You</button>
+                        <button class="tab-button">New Arrival</button>
+                    </div>
+                    <div class="product-grid">
+                        <div class="product-card">
+                            <img src="spray_gun.jpg" alt="Spray Gun">
+                            <h4>Spray Gun</h4>
+                            <p>Mechanical Tools</p>
+                        </div>
+                        <div class="product-card">
+                            <img src="rubber_boots.jpg" alt="Rubber Boots">
+                            <h4>Rubber Boots</h4>
+                            <p>Safety Gear</p>
+                        </div>
+                        <div class="product-card">
+                            <img src="coaxial_cables.jpg" alt="Coaxial Cables">
+                            <h4>Coaxial Cables</h4>
+                            <p>Electrical Supplies</p>
+                        </div>
+                        <div class="product-card">
+                            <img src="impact_driver.jpg" alt="Impact Driver">
+                            <h4>Impact Driver</h4>
+                            <p>Power Tools</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
