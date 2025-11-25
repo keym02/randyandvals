@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Randy & Vals - Settings</title>
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- ⭐ CSS EMBEDDED HERE (INLINE) ⭐ -->
+    <style>
+        /* --- Core Variables and Global Styles --- */
+        :root {
+            --primary-blue: #31488c;
+            --secondary-orange: #da6124;
+            --light-bg: #f5f7fa;
+            --card-bg: #ffffff;
+            --text-dark: #333;
+            --text-light: #f5f7fa;
+            --border-radius-card: 15px;
+            --border-radius-button: 8px;
+            --shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            --success-green: #2ecc71;
+            --danger-red: #e74c3c;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+        }
+
+        /* --- Dashboard Layout --- */
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background-color: var(--primary-blue);
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            color: var(--text-light);
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        .logo p {
+            font-size: 12px;
+            margin-top: 5px;
+            color: var(--secondary-orange);
+            line-height: 1.4;
+            font-weight: 500;
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 10px;
+            border-radius: var(--border-radius-button);
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 16px;
+            transition: background-color 0.2s, color 0.2s;
+            border-radius: var(--border-radius-button);
+        }
+
+        .sidebar-nav a i {
+            margin-right: 15px;
+            font-size: 18px;
+        }
+
+        .sidebar-nav li.active {
+            background-color: var(--secondary-orange);
+        }
+
+        .sidebar-nav li.active a {
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+
+        .sidebar-nav a:hover:not(.sidebar-nav li.active a) {
+            background-color: #3f556d;
+        }
+
+        .sidebar-help {
+            margin-top: auto;
+            padding-top: 20px;
+            border-top: 1px solid #3f556d;
+            text-align: center;
+        }
+
+        .sidebar-help a {
+            color: var(--secondary-orange);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        /* Main Content and Navbar */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            background-color: var(--card-bg);
+            padding: 15px 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h2 {
+            margin: 0;
+            color: var(--primary-blue);
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .nav-icons {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-icons .icon-button {
+            background: none;
+            border: none;
+            color: var(--primary-blue);
+            font-size: 20px;
+            margin-left: 15px;
+            cursor: pointer;
+            padding: 5px;
+            transition: color 0.2s;
+        }
+
+        .nav-icons .icon-button:hover {
+            color: var(--secondary-orange);
+        }
+
+        .dashboard-body {
+            padding: 30px;
+            flex-grow: 1;
+        }
+
+        /* --- Settings Page Specific Styles --- */
+        
+        .settings-container {
+            display: flex;
+            gap: 30px;
+        }
+
+        /* Settings Sidebar/Tabs */
+        .settings-nav {
+            flex-shrink: 0;
+            width: 250px;
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius-card);
+            box-shadow: var(--shadow);
+            padding: 20px 0;
+            height: fit-content;
+        }
+        
+        .settings-nav button {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            text-align: left;
+            padding: 15px 25px;
+            border: none;
+            background: none;
+            font-size: 16px;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+            font-weight: 500;
+        }
+        
+        .settings-nav button i {
+            margin-right: 15px;
+            color: var(--primary-blue);
+            font-size: 18px;
+        }
+
+        .settings-nav button:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .settings-nav button.active {
+            background-color: var(--secondary-orange);
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+
+        .settings-nav button.active i {
+            color: var(--primary-blue);
+        }
+
+        /* Settings Content Area */
+        .settings-content {
+            flex-grow: 1;
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius-card);
+            box-shadow: var(--shadow);
+            padding: 30px;
+        }
+        
+        .tab-content {
+            display: none; /* Hidden by default, shown by JS */
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .tab-content h3 {
+            color: var(--primary-blue);
+            margin-top: 0;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+            font-size: 22px;
+        }
+
+        /* Form Styling */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 15px;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input[type="text"], 
+        .form-group input[type="email"], 
+        .form-group input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius-button);
+            box-sizing: border-box;
+            font-size: 15px;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--secondary-orange);
+            outline: none;
+        }
+
+        /* Toggle Switches */
+        .toggle-setting {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .toggle-setting:last-child {
+            border-bottom: none;
+        }
+
+        .toggle-info h4 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .toggle-info p {
+            margin: 5px 0 0;
+            font-size: 13px;
+            color: #888;
+        }
+        
+        .switch {
+          position: relative;
+          display: inline-block;
+          width: 50px;
+          height: 24px;
+        }
+
+        .switch input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+        }
+
+        .slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #ccc;
+          transition: .4s;
+          border-radius: 24px;
+        }
+
+        .slider:before {
+          position: absolute;
+          content: "";
+          height: 16px;
+          width: 16px;
+          left: 4px;
+          bottom: 4px;
+          background-color: white;
+          transition: .4s;
+          border-radius: 50%;
+        }
+
+        input:checked + .slider {
+          background-color: var(--success-green);
+        }
+
+        input:checked + .slider:before {
+          transform: translateX(26px);
+        }
+
+        /* Save Button */
+        .save-settings-button {
+            padding: 12px 25px;
+            background-color: var(--primary-blue);
+            color: var(--card-bg);
+            border: none;
+            border-radius: var(--border-radius-button);
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 10px;
+        }
+        
+        .save-settings-button:hover {
+            background-color: #34495e;
+        }
+
+
+        /* Responsive Adjustments */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 70px;
+                padding: 15px 10px;
+            }
+            .logo h1, .logo p, .sidebar-nav span {
+                display: none;
+            }
+            .sidebar-nav a {
+                justify-content: center;
+                margin-bottom: 5px;
+                padding: 10px;
+            }
+            .sidebar-nav a i {
+                margin-right: 0;
+            }
+            .sidebar-help {
+                visibility: hidden;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .settings-container {
+                flex-direction: column; /* Stack layout */
+                gap: 20px;
+            }
+            .settings-nav {
+                width: 100%;
+                display: flex;
+                overflow-x: auto; /* Allow scrolling for tabs */
+                padding: 10px 0;
+            }
+            .settings-nav button {
+                white-space: nowrap; /* Prevent wrapping */
+                padding: 10px 15px;
+                flex-shrink: 0;
+                justify-content: center;
+            }
+            .settings-nav button i {
+                margin-right: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+
+        <!-- Sidebar - Settings is Active -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>RANDY & VALS</h1>
+                <p>ELECTRICAL & GENERAL<br>MERCHANDISE</p>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-th-large"></i> <span>Dashboard</span></a></li>
+                    <li><a href="products.html"><i class="fas fa-box"></i> <span>Products</span></a></li>
+                    <li><a href="mycart.html"><i class="fas fa-shopping-cart"></i> <span>My Cart</span></a></li>
+                    <li><a href="payout.html"><i class="fas fa-credit-card"></i> <span>Payout</span></a></li>
+                    <li><a href="profile.html"><i class="fas fa-user"></i> <span>Profile</span></a></li>
+                    <li class="active"><a href="#"><i class="fas fa-cog"></i> <span>Settings</span></a></li>
+                    <li><a href="logout.html"><i class="fas fa-sign-out-alt"></i> <span>Log Out</span></a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-help">
+                <a href="#"><i class="fas fa-question-circle"></i> Help</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <!-- Navbar -->
+            <header class="navbar">
+                <h2>System Settings</h2>
+                <div class="nav-icons">
+                    <button class="icon-button"><i class="fas fa-bell"></i></button>
+                    <button class="icon-button"><i class="fas fa-search"></i></button>
+                    <button class="icon-button"><i class="fas fa-bars"></i></button>
+                </div>
+            </header>
+
+            <!-- SETTINGS PAGE CONTENT -->
+            <section class="dashboard-body settings-page">
+                <div class="settings-container">
+                    
+                    <!-- Settings Navigation Tabs -->
+                    <nav class="settings-nav">
+                        <button class="tab-button active" data-tab="profile"><i class="fas fa-user-circle"></i> Profile</button>
+                        <button class="tab-button" data-tab="security"><i class="fas fa-shield-alt"></i> Security</button>
+                        <button class="tab-button" data-tab="notifications"><i class="fas fa-bell"></i> Notifications</button>
+                        <button class="tab-button" data-tab="advanced"><i class="fas fa-sliders-h"></i> Advanced</button>
+                    </nav>
+
+                    <!-- Settings Content Area -->
+                    <div class="settings-content">
+                        
+                        <!-- Tab 1: Profile Settings -->
+                        <div id="profile" class="tab-content active">
+                            <h3>General Profile Settings</h3>
+                            <form id="profile-form">
+                                <div class="form-group">
+                                    <label for="setting-name">Full Name</label>
+                                    <input type="text" id="setting-name" value="Randy S. Dela Cruz" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="setting-email">Email Address</label>
+                                    <input type="email" id="setting-email" value="randy.delacruz@randyvals.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="setting-phone">Phone Number</label>
+                                    <input type="text" id="setting-phone" value="+639171234567">
+                                </div>
+								
+                                <button type="submit" class="save-settings-button">Save Profile</button>
+                            </form>
+                        </div>
+                        
+                        <!-- Tab 2: Security Settings -->
+                        <div id="security" class="tab-content">
+                            <h3>Account Security</h3>
+                            <form id="security-form">
+                                <div class="form-group">
+                                    <label for="current-password">Current Password</label>
+                                    <input type="password" id="current-password" placeholder="Enter current password" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="new-password">New Password</label>
+                                    <input type="password" id="new-password" placeholder="Enter new password (min 8 characters)">
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirm-password">Confirm New Password</label>
+                                    <input type="password" id="confirm-password" placeholder="Confirm new password">
+                                </div>
+                                
+                                <div class="toggle-setting">
+                                    <div class="toggle-info">
+                                        <h4>Two-Factor Authentication (2FA)</h4>
+                                        <p>Add an extra layer of security to your account.</p>
+                                    </div>
+                                    <label class="switch">
+                                      <input type="checkbox" id="2fa-toggle" checked>
+                                      <span class="slider"></span>
+                                    </label>
+                                </div>
+
+                                <button type="submit" class="save-settings-button">Update Security</button>
+                            </form>
+                        </div>
+
+                        <!-- Tab 3: Notifications Settings -->
+                        <div id="notifications" class="tab-content">
+                            <h3>Notification Preferences</h3>
+                            
+                            <div class="toggle-setting">
+                                <div class="toggle-info">
+                                    <h4>Email Notifications for Orders</h4>
+                                    <p>Get an email when an order is placed or updated.</p>
+                                </div>
+                                <label class="switch">
+                                  <input type="checkbox" checked>
+                                  <span class="slider"></span>
+                                </label>
+                            </div>
+
+                            <div class="toggle-setting">
+                                <div class="toggle-info">
+                                    <h4>SMS Alerts</h4>
+                                    <p>Receive text messages for important security actions.</p>
+                                </div>
+                                <label class="switch">
+                                  <input type="checkbox">
+                                  <span class="slider"></span>
+                                </label>
+                            </div>
+                            
+                            <div class="toggle-setting">
+                                <div class="toggle-info">
+                                    <h4>Marketing and Promotional Emails</h4>
+                                    <p>Receive updates on new products and sales.</p>
+                                </div>
+                                <label class="switch">
+                                  <input type="checkbox">
+                                  <span class="slider"></span>
+                                </label>
+                            </div>
+                            
+                            <button class="save-settings-button">Save Notification Settings</button>
+                        </div>
+                        
+                        <!-- Tab 4: Advanced Settings -->
+                        <div id="advanced" class="tab-content">
+                            <h3>Advanced System Settings</h3>
+                            <p>This area contains settings that can affect the entire account setup.</p>
+                            
+                            <button class="save-settings-button" style="background-color: var(--danger-red); margin-top: 20px;">
+                                <i class="fas fa-trash-alt"></i> Delete Account
+                            </button>
+                            <p style="font-size: 14px; color: var(--danger-red); margin-top: 10px;">Warning: This action is irreversible.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ⭐ INLINE JAVASCRIPT FOR SETTINGS PAGE ⭐ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const PROFILE_KEY = 'randyValsUserProfile';
+
+            // --- A. Load Profile Data from LocalStorage on Page Load ---
+            const loadProfileData = () => {
+                const savedData = localStorage.getItem(PROFILE_KEY);
+                if (savedData) {
+                    try {
+                        const profile = JSON.parse(savedData);
+                        document.getElementById('setting-name').value = profile.fullName || '';
+                        document.getElementById('setting-email').value = profile.email || '';
+                        document.getElementById('setting-phone').value = profile.phone || '';
+                    } catch (e) {
+                        console.error('Error parsing profile data from local storage:', e);
+                    }
+                }
+            };
+
+            // --- 1. Tab Switching Logic ---
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            const switchTab = (targetTabId) => {
+                // Deactivate all buttons and content
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                // Activate the selected button
+                document.querySelector(`.tab-button[data-tab="${targetTabId}"]`).classList.add('active');
+                // Activate the selected content
+                document.getElementById(targetTabId).classList.add('active');
+            };
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    switchTab(this.getAttribute('data-tab'));
+                });
+            });
+            
+            // --- 2. Form Submission Handlers (Simulated) ---
+            
+            const handleFormSubmission = (formId, successMessage) => {
+                const form = document.getElementById(formId);
+                if (form) {
+                    form.addEventListener('submit', function(event) {
+                        event.preventDefault();
+                        
+                        if (formId === 'profile-form') {
+                            const fullName = document.getElementById('setting-name').value;
+                            const email = document.getElementById('setting-email').value;
+                            const phone = document.getElementById('setting-phone').value;
+                            
+                            // Save data to localStorage to be read by profile.html
+                            const profileData = { fullName, email, phone };
+                            localStorage.setItem(PROFILE_KEY, JSON.stringify(profileData));
+                            
+                            alert('Profile settings saved successfully and available for other pages!');
+                            return; // Stop further general processing
+                        }
+                        
+                        // Basic validation for security form
+                        if (formId === 'security-form') {
+                            const newPass = document.getElementById('new-password').value;
+                            const confirmPass = document.getElementById('confirm-password').value;
+                            
+                            if (newPass && newPass.length < 8) {
+                                alert("New password must be at least 8 characters long.");
+                                return;
+                            }
+                            if (newPass !== confirmPass) {
+                                alert("New Password and Confirm Password do not match.");
+                                return;
+                            }
+                        }
+
+                        // Default message for other forms
+                        alert(successMessage);
+                    });
+                }
+            };
+
+            handleFormSubmission('profile-form', 'Profile settings saved successfully!');
+            handleFormSubmission('security-form', 'Security settings updated successfully!');
+            handleFormSubmission('notifications-form', 'Notification settings saved.'); // Placeholder for the button's click, though it's not a form element
+
+            // --- 3. Initial Setup ---
+            loadProfileData(); // Load any previously saved data
+
+            // --- 4. Sidebar active link functionality (general dashboard logic) ---
+            const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    sidebarLinks.forEach(item => item.parentElement.classList.remove('active'));
+                    this.parentElement.classList.add('active');
+                });
+            });
+            
+            // --- 5. Navbar interaction ---
+            const navIcons = document.querySelectorAll('.nav-icons .icon-button');
+            navIcons.forEach(icon => {
+                icon.addEventListener('click', function() {
+                    alert(`Clicked ${this.querySelector('i').className.replace('fas fa-', '')}!`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+I've updated the `settings.html` file to save the profile data to the browser's local storage.
+
+**Next Steps for `profile.html`:**
+
+To complete this functionality, you need to ensure that the `profile.html` page (which you haven't shared yet) includes JavaScript to **read** the data saved in `localStorage` under the key `randyValsUserProfile` and use it to display the updated profile details. Let me know when you're ready to create or update your `profile.html` file!

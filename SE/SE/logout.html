@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logged Out</title>
+    
+    <style>
+        /* Basic styles for the logout page */
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: #f0f4f7; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .logout-box {
+            background-color: white; 
+            padding: 50px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1); 
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+        h2 { 
+            color: #e74c3c; /* Red for emphasis */
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+        p {
+            color: #555;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        /* Action Buttons */
+        .action-links {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+        }
+        .action-links a {
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            flex-grow: 1;
+        }
+        .login-btn {
+            background-color: #3498db;
+            color: white;
+        }
+        .browse-btn {
+            background-color: #ecf0f1;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="logout-box">
+        <h2>You Have Logged Out</h2>
+        
+        <p>Thank you for visiting our shop. Your session has been securely ended.</p>
+        <p>You can continue browsing or log back in to access your account features.</p>
+
+        <div class="action-links">
+            <a href="login.html" class="login-btn">Log Back In</a> 
+            
+            <a href="index.html" class="browse-btn">Continue Browsing</a> 
+        </div>
+    </div>
+
+</body>
+</html>

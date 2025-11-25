@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Randy & Vals - Profile</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* --- Core Variables and Global Styles --- */
+        :root {
+            --primary-blue: #31488c;
+            --secondary-orange: #da6124;
+            --light-bg: #f5f7fa;
+            --card-bg: #ffffff;
+            --text-dark: #333;
+            --text-light: #f5f7fa;
+            --border-radius-card: 15px;
+            --border-radius-button: 8px;
+            --shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            --success-green: #2ecc71;
+            --danger-red: #e74c3c;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+        }
+
+        /* --- Dashboard Layout --- */
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background-color: var(--primary-blue);
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            color: var(--text-light);
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        .logo p {
+            font-size: 12px;
+            margin-top: 5px;
+            color: var(--secondary-orange);
+            line-height: 1.4;
+            font-weight: 500;
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 10px;
+            border-radius: var(--border-radius-button);
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 16px;
+            transition: background-color 0.2s, color 0.2s;
+            border-radius: var(--border-radius-button);
+        }
+
+        .sidebar-nav a i {
+            margin-right: 15px;
+            font-size: 18px;
+        }
+
+        .sidebar-nav li.active {
+            background-color: var(--secondary-orange);
+        }
+
+        .sidebar-nav li.active a {
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+
+        .sidebar-nav a:hover:not(.sidebar-nav li.active a) {
+            background-color: #3f556d;
+        }
+
+        .sidebar-help {
+            margin-top: auto;
+            padding-top: 20px;
+            border-top: 1px solid #3f556d;
+            text-align: center;
+        }
+
+        .sidebar-help a {
+            color: var(--secondary-orange);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        /* Main Content and Navbar */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            background-color: var(--card-bg);
+            padding: 15px 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h2 {
+            margin: 0;
+            color: var(--primary-blue);
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .nav-icons {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-icons .icon-button {
+            background: none;
+            border: none;
+            color: var(--primary-blue);
+            font-size: 20px;
+            margin-left: 15px;
+            cursor: pointer;
+            padding: 5px;
+            transition: color 0.2s;
+        }
+
+        .nav-icons .icon-button:hover {
+            color: var(--secondary-orange);
+        }
+
+        .dashboard-body {
+            padding: 30px;
+            flex-grow: 1;
+        }
+
+        /* --- Profile Page Specific Styles --- */
+        .profile-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius-card);
+            box-shadow: var(--shadow);
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .profile-header {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .profile-header h3 {
+            color: var(--primary-blue);
+            font-size: 24px;
+            margin-top: 10px;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            background-color: var(--light-bg);
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+            color: var(--secondary-orange);
+            border: 4px solid var(--secondary-orange);
+        }
+
+        .profile-details {
+            text-align: left;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--primary-blue);
+            width: 40%;
+            display: flex;
+            align-items: center;
+        }
+        
+        .detail-label i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        .detail-value {
+            width: 60%;
+            text-align: right;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+        
+        .edit-button-container {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .edit-button {
+            padding: 12px 25px;
+            background-color: var(--secondary-orange);
+            color: var(--primary-blue);
+            border: none;
+            border-radius: var(--border-radius-button);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            text-decoration: none; /* If linking to settings.html */
+            display: inline-block;
+        }
+
+        .edit-button:hover {
+            background-color: #e68a00;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 70px;
+                padding: 15px 10px;
+            }
+            .logo h1, .logo p, .sidebar-nav span {
+                display: none;
+            }
+            .sidebar-nav a {
+                justify-content: center;
+                margin-bottom: 5px;
+                padding: 10px;
+            }
+            .sidebar-nav a i {
+                margin-right: 0;
+            }
+            .sidebar-help {
+                visibility: hidden;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .profile-card {
+                padding: 20px;
+            }
+            .detail-item {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 10px 0;
+            }
+            .detail-label, .detail-value {
+                width: 100%;
+                text-align: left;
+            }
+            .detail-value {
+                margin-top: 5px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>RANDY & VALS</h1>
+                <p>ELECTRICAL & GENERAL<br>MERCHANDISE</p>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-th-large"></i> <span>Dashboard</span></a></li>
+                    <li><a href="products.html"><i class="fas fa-box"></i> <span>Products</span></a></li>
+                    <li><a href="mycart.html"><i class="fas fa-shopping-cart"></i> <span>My Cart</span></a></li>
+                    <li><a href="payout.html"><i class="fas fa-credit-card"></i> <span>Payout</span></a></li>
+                    <li class="active"><a href="#"><i class="fas fa-user"></i> <span>Profile</span></a></li>
+                    <li><a href="settings.html"><i class="fas fa-cog"></i> <span>Settings</span></a></li>
+                    <li><a href="logout.html"><i class="fas fa-sign-out-alt"></i> <span>Log Out</span></a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-help">
+                <a href="#"><i class="fas fa-question-circle"></i> Help</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="navbar">
+                <h2>User Profile</h2>
+                <div class="nav-icons">
+                    <button class="icon-button"><i class="fas fa-bell"></i></button>
+                    <button class="icon-button"><i class="fas fa-search"></i></button>
+                    <button class="icon-button"><i class="fas fa-bars"></i></button>
+                </div>
+            </header>
+
+            <section class="dashboard-body profile-page">
+                <div class="profile-card">
+                    
+                    <div class="profile-header">
+                        <div class="profile-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <h3 id="display-name">Randy S. Dela Cruz</h3>
+                      
+                    </div>
+
+                    <div class="profile-details">
+                        <div class="detail-item">
+                            <span class="detail-label"><i class="fas fa-signature"></i> Full Name:</span>
+                            <span class="detail-value" id="profile-full-name">Randy S. Dela Cruz</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label"><i class="fas fa-envelope"></i> Email Address:</span>
+                            <span class="detail-value" id="profile-email">randy.delacruz@randyvals.com</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label"><i class="fas fa-phone"></i> Phone Number:</span>
+                            <span class="detail-value" id="profile-phone">+639171234567</span>
+                        </div>
+                       
+                    </div>
+                    
+                    <div class="edit-button-container">
+                        <a href="settings.html" class="edit-button">
+                            <i class="fas fa-edit"></i> Edit Profile in Settings
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const PROFILE_KEY = 'randyValsUserProfile';
+            
+            // --- A. Function to Load Profile Data from LocalStorage ---
+            const loadAndDisplayProfile = () => {
+                const savedData = localStorage.getItem(PROFILE_KEY);
+                
+                // Set default values (used if no data is in localStorage)
+                let fullName = 'Randy S. Dela Cruz';
+                let email = 'randy.delacruz@randyvals.com';
+                let phone = '+639171234567';
+
+                if (savedData) {
+                    try {
+                        const profile = JSON.parse(savedData);
+                        // Use saved data if available, otherwise keep default
+                        fullName = profile.fullName || fullName;
+                        email = profile.email || email;
+                        phone = profile.phone || phone;
+                    } catch (e) {
+                        console.error('Error parsing profile data from local storage:', e);
+                        // Fallback to default values if parsing fails
+                    }
+                }
+
+                // Update the elements on the Profile page
+                document.getElementById('display-name').textContent = fullName;
+                document.getElementById('profile-full-name').textContent = fullName;
+                document.getElementById('profile-email').textContent = email;
+                document.getElementById('profile-phone').textContent = phone;
+            };
+
+            // Load and display the profile data when the page loads
+            loadAndDisplayProfile();
+            
+            // --- Sidebar active link functionality (general dashboard logic) ---
+            const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+            sidebarLinks.forEach(link => {
+                // Check if the link href matches the current file (or active state)
+                if (link.href.endsWith('profile.html') || link.parentElement.classList.contains('active')) {
+                     link.parentElement.classList.add('active');
+                }
+            });
+            
+            // --- Navbar interaction (simulated) ---
+            const navIcons = document.querySelectorAll('.nav-icons .icon-button');
+            navIcons.forEach(icon => {
+                icon.addEventListener('click', function() {
+                    // console.log(`Clicked ${this.querySelector('i').className.replace('fas fa-', '')}!`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

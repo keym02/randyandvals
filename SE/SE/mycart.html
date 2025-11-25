@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Randy & Vals - My Cart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-blue: #31488c;
+            --secondary-orange: #da6124;
+            --light-bg: #f5f7fa;
+            --card-bg: #ffffff;
+            --text-dark: #333;
+            --text-light: #f5f7fa;
+            --border-radius-button: 8px;
+            --shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background-color: var(--light-bg);
+        }
+
+        .dashboard-container { display: flex; min-height: 100vh; }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 280px;
+            background-color: var(--primary-blue);
+            padding: 30px 20px;
+            color: var(--text-light);
+        }
+
+        .logo { text-align: center; margin-bottom: 40px; }
+        .logo h1 { margin: 0; font-size: 24px; }
+        .logo p { margin-top: 5px; color: var(--secondary-orange); }
+
+        .sidebar-nav ul { list-style: none; padding: 0; }
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            text-decoration: none;
+            color: var(--text-light);
+            border-radius: var(--border-radius-button);
+        }
+        .sidebar-nav li.active a {
+            background-color: var(--secondary-orange);
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+        .sidebar-nav i { margin-right: 10px; }
+
+        /* MAIN CONTENT */
+        .main-content { flex-grow: 1; display: flex; flex-direction: column; }
+
+        .cart-header {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            font-size: 2em;
+            font-weight: 700;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+
+        .cart-container {
+            width: 92%;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        table { width: 100%; border-collapse: collapse; }
+        th { background: var(--primary-blue); color: white; padding: 12px; }
+        td { padding: 12px; border-bottom: 1px solid #eee; text-align: center; }
+
+        img {
+            width: 65px;
+            height: 65px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .qty-btn {
+            padding: 5px 10px;
+            background: var(--secondary-orange);
+            color: var(--light-bg);
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .remove-btn {
+            padding: 6px 12px;
+            background: #d63031;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .total-area {
+            text-align: right;
+            font-size: 1.6em;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .checkout-btn {
+            margin-top: 25px;
+            width: 100%;
+            padding: 14px;
+            background: var(--secondary-orange);
+            color: var(--light-bg);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="logo">
+            <h1>RANDY & VALS</h1>
+            <p>ELECTRICAL & GENERAL MERCHANDISE</p>
+        </div>
+
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="index.html"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                <li><a href="products.html"><i class="fas fa-box"></i> Products</a></li>
+                <li class="active"><a href="mycart.html"><i class="fas fa-shopping-cart"></i> My Cart</a></li>
+                <li><a href="payout.html"><i class="fas fa-credit-card"></i> Payout</a></li>
+                <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                <li><a href="logout.html"><i class="fas fa-sign-out-alt"></i> Log Out</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <header class="cart-header">MY CART</header>
+
+        <div class="cart-container">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Qty</th>
+                        <th>Subtotal</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="cartBody"></tbody>
+            </table>
+
+            <div class="total-area" id="totalDisplay">Total: ₱0.00</div>
+          <a href="payout.html">  <button class="checkout-btn">Proceed to Checkout</button></a>
+
+        </div>
+    </main>
+
+</div>
+
+<script>
+    // VALID PRODUCT IDs (para tanggalin ang mga wala dito)
+    const validProductIDs = [
+        "P001","P002","P003","P004","P005",
+        "P006","P007","P008","P009","P010"
+    ];
+
+    function getCart() {
+        const cart = localStorage.getItem("shoppingCart");
+        return cart ? JSON.parse(cart) : [];
+    }
+
+    function saveCart(cart) {
+        localStorage.setItem("shoppingCart", JSON.stringify(cart));
+    }
+
+    // 🔥 AUTO-CLEAN NG LUMANG / INVALID ITEMS
+    function cleanCart() {
+        let cart = getCart();
+        let cleaned = cart.filter(item => validProductIDs.includes(item.id));
+        saveCart(cleaned);
+    }
+
+    function renderCart() {
+        cleanCart(); // auto-clean BEFORE displaying
+
+        const cart = getCart();
+        const cartBody = document.getElementById("cartBody");
+        const totalDisplay = document.getElementById("totalDisplay");
+
+        cartBody.innerHTML = "";
+        let total = 0;
+
+        cart.forEach(item => {
+            const subtotal = item.price * item.quantity;
+            total += subtotal;
+
+            cartBody.innerHTML += `
+                <tr>
+                    <td><img src="${item.img}" alt=""></td>
+                    <td>${item.name}</td>
+                    <td>₱${item.price.toFixed(2)}</td>
+                    <td>
+                        <button class="qty-btn" onclick="updateQty('${item.id}', -1)">−</button>
+                        ${item.quantity}
+                        <button class="qty-btn" onclick="updateQty('${item.id}', 1)">+</button>
+                    </td>
+                    <td>₱${subtotal.toFixed(2)}</td>
+                    <td><button class="remove-btn" onclick="removeItem('${item.id}')">Remove</button></td>
+                </tr>
+            `;
+        });
+
+        totalDisplay.textContent = `Total: ₱${total.toFixed(2)}`;
+    }
+
+    function updateQty(id, change) {
+        let cart = getCart();
+        const index = cart.findIndex(item => item.id === id);
+
+        if (index > -1) {
+            cart[index].quantity += change;
+            if (cart[index].quantity <= 0) cart.splice(index, 1);
+            saveCart(cart);
+            renderCart();
+        }
+    }
+
+    function removeItem(id) {
+        let cart = getCart().filter(item => item.id !== id);
+        saveCart(cart);
+        renderCart();
+    }
+
+    document.addEventListener("DOMContentLoaded", renderCart);
+</script>
+
+</body>
+</html>

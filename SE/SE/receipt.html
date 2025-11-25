@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Receipt</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .receipt-container {
+            width: 95%;
+            max-width: 600px;
+            background: #fff;
+            padding: 25px;
+            margin: 40px auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .section-title {
+            font-weight: bold;
+            margin-top: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        .info {
+            margin: 8px 0;
+        }
+
+        .item-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .total {
+            text-align: right;
+            font-size: 1.3em;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .btn-print {
+            width: 100%;
+            padding: 12px;
+            background: #31488c;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 25px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="receipt-container">
+
+    <h2>ORDER RECEIPT</h2>
+
+    <div id="customerInfo"></div>
+
+    <div class="section-title">Order Items</div>
+    <div id="itemList"></div>
+
+    <div class="total" id="totalAmount">Total: ₱0.00</div>
+
+    <button class="btn-print" onclick="window.print()">Print Receipt</button>
+
+</div>
+
+<script>
+    function loadReceipt() {
+        const data = localStorage.getItem("orderInfo");
+
+        if (!data) {
+            document.body.innerHTML = "<h2 style='text-align:center;'>No receipt data found.</h2>";
+            return;
+        }
+
+        const order = JSON.parse(data);
+
+        // Display customer information
+        document.getElementById("customerInfo").innerHTML = `
+            <div class="section-title">Customer Info</div>
+            <div class="info"><strong>Name:</strong> ${order.name}</div>
+            <div class="info"><strong>Address:</strong> ${order.address}</div>
+            <div class="info"><strong>Phone:</strong> ${order.phone}</div>
+            <div class="info"><strong>Payment Method:</strong> ${order.payment}</div>
+            <div class="info"><strong>Date:</strong> ${order.date}</div>
+        `;
+
+        // Load items
+        let total = 0;
+        const itemList = document.getElementById("itemList");
+        itemList.innerHTML = "";
+
+        order.cart.forEach(item => {
+            const subtotal = item.price * item.quantity;
+            total += subtotal;
+
+            itemList.innerHTML += `
+                <div class="item-row">
+                    <span>${item.name} (x${item.quantity})</span>
+                    <span>₱${subtotal.toFixed(2)}</span>
+                </div>
+            `;
+        });
+
+        document.getElementById("totalAmount").textContent =
+            `Total: ₱${total.toFixed(2)}`;
+    }
+
+    document.addEventListener("DOMContentLoaded", loadReceipt);
+</script>
+
+</body>
+</html>

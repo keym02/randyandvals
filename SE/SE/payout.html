@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Randy & Vals - Checkout</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-blue: #31488c;
+            --secondary-orange: #da6124;
+            --light-bg: #f5f7fa;
+            --text-dark: #333;
+            --border-radius-button: 8px;
+            --shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: Poppins, sans-serif;
+            margin: 0;
+            background: var(--light-bg);
+        }
+
+        .container {
+            width: 95%;
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        h2 {
+            margin-top: 0;
+            color: var(--primary-blue);
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .total {
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: right;
+            margin-top: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        label {
+            font-weight: 600;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #bbb;
+            border-radius: 8px;
+            margin-top: 5px;
+        }
+
+        .place-order-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--secondary-orange);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.3em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2><i class="fas fa-receipt"></i> Order Summary</h2>
+
+    <div id="orderList"></div>
+
+    <div class="total" id="orderTotal">Total: ₱0.00</div>
+
+    <h2 style="margin-top:35px;"><i class="fas fa-truck"></i> Delivery Information</h2>
+
+    <div class="form-group">
+        <label>Full Name</label>
+        <input id="fullName" type="text">
+    </div>
+
+    <div class="form-group">
+        <label>Complete Address</label>
+        <textarea id="address" rows="3"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label>Phone Number</label>
+        <input id="phone" type="text">
+    </div>
+
+    <div class="form-group">
+        <label>Payment Method</label>
+        <select id="payment">
+            <option value="">Select Payment Method</option>
+            <option value="COD">Cash on Delivery</option>
+            <option value="GCash">GCash</option>
+            <option value="Bank">Bank Transfer</option>
+        </select>
+    </div>
+
+    <button class="place-order-btn" onclick="placeOrder()">Place Order</button>
+
+</div>
+
+<script>
+    function getCart() {
+        const cart = localStorage.getItem("shoppingCart");
+        return cart ? JSON.parse(cart) : [];
+    }
+
+    function loadSummary() {
+        const cart = getCart();
+        const orderList = document.getElementById("orderList");
+        const orderTotal = document.getElementById("orderTotal");
+
+        let total = 0;
+        orderList.innerHTML = "";
+
+        cart.forEach(item => {
+            const subtotal = item.quantity * item.price;
+            total += subtotal;
+
+            orderList.innerHTML += `
+                <div class="summary-item">
+                    <span>${item.name} (x${item.quantity})</span>
+                    <strong>₱${subtotal.toFixed(2)}</strong>
+                </div>
+            `;
+        });
+
+        orderTotal.textContent = `Total: ₱${total.toFixed(2)}`;
+    }
+
+    function placeOrder() {
+        const name = document.getElementById("fullName").value.trim();
+        const address = document.getElementById("address").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const payment = document.getElementById("payment").value;
+
+        if (!name || !address || !phone || !payment) {
+            alert("Please fill out all required fields.");
+            return;
+        }
+
+        // Save order details temporarily
+        const orderInfo = {
+            name, address, phone, payment,
+            cart: getCart(),
+            date: new Date().toLocaleString()
+        };
+
+        localStorage.setItem("orderInfo", JSON.stringify(orderInfo));
+
+        // Clear cart
+        localStorage.removeItem("shoppingCart");
+
+        // Redirect to receipt
+        window.location.href = "receipt.html";
+    }
+
+    document.addEventListener("DOMContentLoaded", loadSummary);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Randy & Vals - Our Products</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* --- Styles (Parehong-pareho sa huli mong tinanggap) --- */
+        :root {
+            --primary-blue: #31488c; --secondary-orange: #da6124; --light-bg: #f5f7fa;
+            --card-bg: #ffffff; --text-dark: #333; --text-light: #f5f7fa;
+            --border-radius-button: 8px; --shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            --header-bg: #31488c; --header-text: #ecf0f1;
+        }
+        * { box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; background-color: var(--light-bg); color: var(--text-dark); }
+        .dashboard-container { display: flex; min-height: 100vh; }
+        .sidebar { width: 280px; background-color: var(--primary-blue); padding: 30px 20px; color: var(--text-light); }
+        .logo { text-align: center; margin-bottom: 40px; }
+        .logo h1 { font-size: 24px; margin: 0; }
+        .logo p { font-size: 12px; margin-top: 5px; color: var(--secondary-orange); }
+        .sidebar-nav ul { list-style: none; padding: 0; }
+        .sidebar-nav a { display: flex; align-items: center; padding: 12px 15px; text-decoration: none; color: var(--text-light); border-radius: var(--border-radius-button); }
+        .sidebar-nav li.active a { background-color: var(--secondary-orange); color: var(--primary-blue); font-weight: 600; }
+        .main-content { flex-grow: 1; display: flex; flex-direction: column; }
+        .product-showcase-header { background-color: var(--header-bg); color: var(--header-text); padding: 30px 0; text-align: center; font-size: 2.2em; font-weight: 700; box-shadow: var(--shadow); margin-bottom: 30px; }
+        .product-section { padding: 0 30px 30px 30px; }
+        .section-title { font-size: 2em; color: var(--primary-blue); margin-bottom: 25px; font-weight: 700; }
+        .product-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; }
+        .product-card { background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); overflow: hidden; display: flex; flex-direction: column; }
+        .product-image-container { width: 100%; height: 150px; overflow: hidden; display: flex; justify-content: center; align-items: center; }
+        .product-image-container img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .product-info { padding: 15px 10px; text-align: center; display: flex; flex-direction: column; flex-grow: 1; }
+        .product-info .product-name { font-size: 1.1em; color: var(--primary-blue); margin: 5px 0 3px; font-weight: 600; line-height: 1.2; min-height: 2.4em; }
+        .product-info .product-price { font-size: 1.4em; color: var(--secondary-orange); font-weight: 700; margin-bottom: 10px; margin-top: auto; }
+        .add-to-cart-button { background-color: var(--secondary-orange); color: var(--primary-blue); border: none; padding: 8px 15px; border-radius: var(--border-radius-button); font-size: 0.9em; font-weight: 600; cursor: pointer; width: 100%; }
+        .add-to-cart-button:hover { background-color: #e67e22; }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+
+        <aside class="sidebar">
+            <div class="logo"><h1>RANDY & VALS</h1><p>ELECTRICAL & GENERAL MERCHANDISE</p></div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-th-large"></i> <span>Dashboard</span></a></li>
+                    <li class="active"><a href="products.html"><i class="fas fa-box"></i> <span>Products</span></a></li>
+                    <li><a href="mycart.html"><i class="fas fa-shopping-cart"></i> <span>My Cart</span></a></li>
+                    <li><a href="payout.html"><i class="fas fa-credit-card"></i> <span>Payout</span></a></li>
+                    <li><a href="profile.html"><i class="fas fa-user"></i> <span>Profile</span></a></li>
+                    <li><a href="settings.html"><i class="fas fa-cog"></i> <span>Settings</span></a></li>
+                    <li><a href="logout.html"><i class="fas fa-sign-out-alt"></i> <span>Log Out</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="product-showcase-header">PRODUCTS</header>
+
+            <section class="product-section">
+                <h2 class="section-title">ELECTRICAL SUPPLIES</h2>
+                <div class="product-grid">
+                    
+                    <div class="product-card">
+                        <div class="product-image-container"><img src="electrical_tape.jpg" alt="Electrical Tape"></div>
+                        <div class="product-info">
+                            <p class="product-name">Electrical Tape</p>
+                            <p class="product-price">₱ 30.00</p>
+                            <button class="add-to-cart-button" data-product-id="P001" data-category="Electrical Supplies">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image-container"><img src="cable_ties.jpg" alt="Cable Ties"></div>
+                        <div class="product-info">
+                            <p class="product-name">Cable Ties</p>
+                            <p class="product-price">₱ 50.00</p>
+                            <button class="add-to-cart-button" data-product-id="P002" data-category="Electrical Supplies">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image-container"><img src="coaxial_cables.jpg" alt="Coaxial Cables"></div>
+                        <div class="product-info">
+                            <p class="product-name">Coaxial Cables</p>
+                            <p class="product-price">₱ 185.00</p>
+                            <button class="add-to-cart-button" data-product-id="P003" data-category="Electrical Supplies">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image-container"><img src="voltage_testers.jpg" alt="Voltage Testers"></div>
+                        <div class="product-info">
+                            <p class="product-name">Voltage Testers</p>
+                            <p class="product-price">₱ 200.00</p>
+                            <button class="add-to-cart-button" data-product-id="P004" data-category="Electrical Supplies">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image-container"><img src="fuse_holders.jpg" alt="Fuse Holders"></div>
+                        <div class="product-info">
+                            <p class="product-name">Fuse Holders</p>
+                            <p class="product-price">₱ 190.00</p>
+                            <button class="add-to-cart-button" data-product-id="P005" data-category="Electrical Supplies">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+				
+				<h2 class="section-title">LIGHTING FIXTURES</h2>
+                <div class="product-grid">
+                    
+                    <div class="product-card">
+                        <div class="product-image-container"><img src="flashlights.jpg" alt="Flashlights"></div>
+                        <div class="product-info">
+                            <p class="product-name">Flashlights</p>
+                            <p class="product-price">₱ 80.00</p>
+                            <button class="add-to-cart-button" data-product-id="P006" data-category="Lighting Fixtures">Add to Cart</button>
+                        </div>
+                    </div>
+					 <div class="product-card">
+                        <div class="product-image-container"><img src="floodlights.jpg" alt="Floodlights"></div>
+                        <div class="product-info">
+                            <p class="product-name">Floodlights</p>
+                            <p class="product-price">₱ 380.00</p>
+                            <button class="add-to-cart-button" data-product-id="P007" data-category="Lighting Fixtures">Add to Cart</button>
+                        </div>
+                    </div>
+					 <div class="product-card">
+                        <div class="product-image-container"><img src="flourescent_tube.jpg" alt="Fluorescent Tube"></div>
+                        <div class="product-info">
+                            <p class="product-name">Flourescent Tube</p>
+                            <p class="product-price">₱ 260.00</p>
+                            <button class="add-to-cart-button" data-product-id="P008" data-category="Lighting Fixtures">Add to Cart</button>
+                        </div>
+                    </div>
+					 <div class="product-card">
+                        <div class="product-image-container"><img src="track_lights.jpg" alt="Track Lights"></div>
+                        <div class="product-info">
+                            <p class="product-name">Track Lights</p>
+                            <p class="product-price">₱ 190.00</p>
+                            <button class="add-to-cart-button" data-product-id="P009" data-category="Lighting Fixtures">Add to Cart</button>
+                        </div>
+                    </div>
+					 <div class="product-card">
+                        <div class="product-image-container"><img src="streetlights.jpg" alt="Streetlights"></div>
+                        <div class="product-info">
+                            <p class="product-name">Streetlights</p>
+                            <p class="product-price">₱ 190.00</p>
+                            <button class="add-to-cart-button" data-product-id="P010" data-category="Lighting Fixtures">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        function getCart() {
+            const cart = localStorage.getItem('shoppingCart');
+            return cart ? JSON.parse(cart) : [];
+        }
+
+        function saveCart(cart) {
+            localStorage.setItem('shoppingCart', JSON.stringify(cart));
+        }
+
+        function addToCart(newProduct) {
+            let cart = getCart();
+            const existingProductIndex = cart.findIndex(item => item.id === newProduct.id); 
+
+            if (existingProductIndex > -1) {
+                cart[existingProductIndex].quantity += 1;
+            } else {
+                cart.push(newProduct);
+            }
+            saveCart(cart);
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const cartButtons = document.querySelectorAll('.add-to-cart-button');
+
+            cartButtons.forEach(button => {
+                button.addEventListener('click', function(event) {
+                    event.preventDefault(); 
+                    
+                    const card = this.closest('.product-card');
+                    const productName = card.querySelector('.product-name').textContent.trim();
+                    const productPriceText = card.querySelector('.product-price').textContent.trim();
+                    const productId = this.getAttribute('data-product-id');
+                    const productCategory = this.getAttribute('data-category'); 
+                    
+                    // Kukunin ang presyo at tatanggalin ang '₱' at commas
+                    const priceMatch = productPriceText.match(/(\d[\d,]*\.?\d*)/);
+                    const price = priceMatch ? parseFloat(priceMatch[0].replace(/,/g, '')) : 0;
+                    
+                    let imgSrc = 'placeholder.png';
+                    const imgElement = card.querySelector('.product-image-container img');
+                    if (imgElement) {
+                        imgSrc = imgElement.src;
+                    }
+
+                    const product = {
+                        id: productId, 
+                        name: productName,
+                        price: price,
+                        category: productCategory,
+                        quantity: 1, 
+                        img: imgSrc
+                    };
+
+                    addToCart(product);
+                    
+                    // AUTOMATIC REDIRECTION
+                    window.location.href = 'mycart.html'; 
+                });
+            });
+        });
+    </script>
+</body>
+</html>
