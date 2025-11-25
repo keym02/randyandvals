@@ -13,7 +13,14 @@
     .toggle-btns button.active { background:#31488c; color:white; }
     .form-box { display:none; }
     .form-box.active { display:block; }
-    input { width:100%; padding:12px; margin:8px 0; border-radius:6px; border:1px solid #ccc;}
+    input { 
+        width:100%; 
+        padding:12px; 
+        margin:8px 0; 
+        border-radius:6px; 
+        border:1px solid #ccc;
+        box-sizing: border-box; /* The fix */
+    }
     button.submit { width:100%; padding:12px; border:none; border-radius:6px; cursor:pointer; font-size:1.1em; margin-top:10px;}
     .error { color:red; font-size:0.85em; margin-bottom:5px; }
 </style>
@@ -108,3 +115,78 @@
 
 </body>
 </html>
+        <div id="registerError" class="error"></div>
+        <input type="text" id="regUsername" placeholder="Username">
+        <input type="email" id="regEmail" placeholder="Email">
+        <input type="password" id="regPassword" placeholder="Password">
+        <input type="password" id="regConfirm" placeholder="Confirm Password">
+        <button class="submit" style="background:#31488c;color:white;" onclick="registerUser()">Register</button>
+    </div>
+</div>
+
+<script>
+    // Toggle forms
+    const loginBtn = document.getElementById("loginBtn");
+    const registerBtn = document.getElementById("registerBtn");
+    const loginForm = document.getElementById("loginForm");
+    const registerForm = document.getElementById("registerForm");
+
+    loginBtn.addEventListener("click", () => {
+        loginBtn.classList.add("active");
+        registerBtn.classList.remove("active");
+        loginForm.classList.add("active");
+        registerForm.classList.remove("active");
+    });
+
+    registerBtn.addEventListener("click", () => {
+        registerBtn.classList.add("active");
+        loginBtn.classList.remove("active");
+        registerForm.classList.add("active");
+        loginForm.classList.remove("active");
+    });
+
+    // LOGIN FUNCTION
+    function loginUser() {
+        const username = document.getElementById("loginUsername").value.trim();
+        const password = document.getElementById("loginPassword").value;
+        const errorBox = document.getElementById("loginError");
+        errorBox.textContent = "";
+
+        if (!username || !password) { errorBox.textContent = "Enter username and password."; return; }
+
+        let users = JSON.parse(localStorage.getItem("users") || "[]");
+        const account = users.find(u => u.username === username && u.password === password);
+        if (!account) { errorBox.textContent = "Invalid username or password."; return; }
+
+        localStorage.setItem("loggedInUser", username);
+        window.location.href = "index.html";
+    }
+
+    // REGISTER FUNCTION
+    function registerUser() {
+        const username = document.getElementById("regUsername").value.trim();
+        const email = document.getElementById("regEmail").value.trim();
+        const password = document.getElementById("regPassword").value;
+        const confirm = document.getElementById("regConfirm").value;
+        const errorBox = document.getElementById("registerError");
+        errorBox.textContent = "";
+
+        if (!username || !email || !password || !confirm) { errorBox.textContent = "Please fill in all fields."; return; }
+        if (password !== confirm) { errorBox.textContent = "Passwords do not match."; return; }
+
+        let users = JSON.parse(localStorage.getItem("users") || "[]");
+        if (users.some(u => u.username === username)) { errorBox.textContent = "Username already exists!"; return; }
+        if (users.some(u => u.email === email)) { errorBox.textContent = "Email already registered!"; return; }
+
+        users.push({ username, email, password });
+        localStorage.setItem("users", JSON.stringify(users));
+
+        // Auto-login after registration
+        localStorage.setItem("loggedInUser", username);
+        window.location.href = "index.html";
+    }
+</script>
+
+</body>
+</html>
+
